@@ -16,6 +16,5 @@ export const types = {
   flying: 'flying',
   fight: 'fight',
   electric: 'electric',
-  psychic: 'psychic',
   normal: 'normal'
 }

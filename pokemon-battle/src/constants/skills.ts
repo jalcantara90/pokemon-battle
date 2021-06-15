@@ -1,5 +1,5 @@
-import {Skill} from '../models/skills.model.js';
-import {types} from './types.js';
+import {Skill} from '../models/skills.model';
+import {types} from './types';
 
 const tackle = new Skill('Tackle', 30, 40, types.normal);
 const waterGun = new Skill ('Water gun', 20, 40, types.water);
