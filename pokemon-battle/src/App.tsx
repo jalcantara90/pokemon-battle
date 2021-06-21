@@ -4,7 +4,8 @@ import './App.css'
 import { Trainer } from './models/trainer.model';
 import { TrainerInput, CreateTrainerButton} from './trainer/trainer.styled';
 import { TrainerGrid } from './trainer/Trainer';
-import { pokemonList } from './constants/pokemon-list';
+import { Pokedex, pokemonList } from './data/pokedex';
+import { Pokemon } from './models/pokemon.model';
 
 function App() {
   const [trainerName, setTrainerName] = useState('');
@@ -20,6 +21,18 @@ function App() {
     setTrainerName('');
   }
 
+  const handleUpdateTrainer = (pokemonName: string, trainerId: string) => {
+    const pokemonSelected = Pokedex[pokemonName];
+    const trainer = trainerList.find(t => t.id === trainerId);
+
+    if (pokemonSelected && trainer) {
+      const pokemon = new Pokemon(pokemonSelected.num, pokemonSelected.name, pokemonSelected.types, pokemonSelected.baseStats);
+
+      trainer.addPokemon(pokemon);
+      setTrainerList([...trainerList]);
+    }
+  }
+
   return (
     <div className="App">
       <TrainerInput
@@ -31,7 +44,12 @@ function App() {
       <CreateTrainerButton onClick={handleCreateTrainer}>Crear entrenador</CreateTrainerButton>
       {
         trainerList.map(trainer => {
-          return <TrainerGrid pokemonList={pokemonList} trainer={trainer}/>
+          return <TrainerGrid 
+            key={trainer.id} 
+            pokemonList={pokemonList}
+            trainer={trainer}
+            addPokemon={handleUpdateTrainer}
+          />
         })
       }
     </div>

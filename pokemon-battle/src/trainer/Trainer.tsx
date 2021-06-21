@@ -1,48 +1,43 @@
-import React, { ChangeEvent, useState } from "react"
+import React, { MutableRefObject, useRef } from "react"
+import { ActionButton } from "../components/buttons";
 import { Pokemon } from "../models/pokemon.model";
 import { Trainer } from "../models/trainer.model";
-import { TrainerContainer, PokemonSelect, CreateTrainerButton } from "./trainer.styled"
+import { TrainerContainer, TrainerInput } from "./trainer.styled";
 
+type AddPokemonFn = (pokemonId: string, trainerId: string) => void;
 
-export function TrainerGrid({ trainer, pokemonList }: { trainer: Trainer, pokemonList: Pokemon[] }) {
-  const [pokemonSelected, setPokemonSelected] = useState<Pokemon | null>();
-  
-  const handleSelectorPokemon = (event: ChangeEvent<HTMLSelectElement>) => {
-    const pokemonFound = pokemonList.find(pokemon => pokemon.id === event.target.value);
+export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Trainer, pokemonList: [string, Pokemon][], addPokemon: AddPokemonFn }) {
+  const dataListRef = useRef() as MutableRefObject<HTMLInputElement>;
 
-    if (pokemonFound) {
-      setPokemonSelected(pokemonFound);
-    }
-  }
-
-  const addPokemon = (trainer: Trainer) => {
-
-    if (pokemonSelected) {
-      trainer.addPokemon(pokemonSelected);
-    }
-    setPokemonSelected(null);
+  const handleAddPokemonClick = () => {
+    addPokemon(dataListRef.current.value, trainer.id);
+    dataListRef.current.value = ''
   }
 
   return (
     <TrainerContainer className="mt-2">
       <h3>{trainer.name}</h3>
       <div>
-        <PokemonSelect 
-          value={pokemonSelected?.id}
-          onChange={event => handleSelectorPokemon(event)}
-          className="mr-1">
+
+        <TrainerInput type="text" list="data" className='mr-2' ref={dataListRef} />
+
+        <datalist id="data" >
           {
-            pokemonList.map((pokemon) => {
-              return <option key={pokemon.id} value={pokemon.id}>{pokemon.name}</option>
+            pokemonList.map(([key, pokemon]) => {
+              return <option key={key} value={key}>{pokemon.name}</option>
             })
           }
-        </PokemonSelect>
-        <CreateTrainerButton onClick={() => addPokemon(trainer)}>Añadir pokemon</CreateTrainerButton>
+        </datalist>
+
+        <ActionButton onClick={handleAddPokemonClick}>Añadir pokemon</ActionButton>
       </div>
       <ul>
         {
           trainer.pokemonList.map(p => {
-            return <li>{p.name}</li>
+            return <li key={p.id}>
+                      {p.name}
+                      <img src={`src/assets/pokemon-front/${p.name.toLowerCase()}.gif`} alt="" />
+                    </li>
           })
         }
       </ul>

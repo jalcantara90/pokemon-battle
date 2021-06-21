@@ -20,7 +20,7 @@ export class Trainer {
       return console.error(`No puedes añadir ${pokemon.name}, envía uno al PC`);
     }
 
-    this.pokemonList.push(pokemon); // this.addPokemon(pokemon) // ash.addPokemon(undefined)
+    this.pokemonList = [...this.pokemonList, pokemon];
   }
   
   dropPokemonOnPC(pokemon: Pokemon) {
