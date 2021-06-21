@@ -3,6 +3,9 @@ import { ActionButton } from "../components/buttons";
 import { Pokemon } from "../models/pokemon.model";
 import { Trainer } from "../models/trainer.model";
 import { TrainerContainer, TrainerInput } from "./trainer.styled";
+import {skills} from "../constants/skills";
+
+import { PokemonCard } from './PokemonCard';
 
 type AddPokemonFn = (pokemonId: string, trainerId: string) => void;
 
@@ -30,17 +33,48 @@ export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Tra
         </datalist>
 
         <ActionButton onClick={handleAddPokemonClick}>Añadir pokemon</ActionButton>
-      </div>
-      <ul>
+      </div>  
         {
-          trainer.pokemonList.map(p => {
-            return <li key={p.id}>
-                      {p.name}
-                      <img src={`src/assets/pokemon-front/${p.name.toLowerCase()}.gif`} alt="" />
-                    </li>
-          })
+          trainer.pokemonList.map(p => 
+            <PokemonCard 
+              key={p.id}
+              pokemon={p} skills={Object.values(skills)} 
+            />
+            // <div key={p.id}>
+            //   <img src={`src/assets/pokemon-front/${p.name.toLowerCase()}.gif`} alt="" />
+            //   {p.name}
+            //   <ul>
+            //     <li>
+            //       HP: {p.baseStats.hp}
+            //     </li>
+            //     <li>
+            //       ATK: {p.baseStats.atk}
+            //     </li>
+            //     <li>
+            //       DEF: {p.baseStats.def}
+            //     </li>
+            //     <li>
+            //       SPA: {p.baseStats.spa}
+            //     </li>
+            //     <li>
+            //       SPD: {p.baseStats.spd}
+            //     </li>
+            //     <li>
+            //       SPE: {p.baseStats.spe}
+            //     </li>
+            //   </ul>
+            //   <select name="Attaks" id="">
+            //     {
+            //       Object.values(skills).map((skill, index) => {
+            //         return <option key={index} value="skill.name">{skill.name}</option>
+            //       }) 
+            //     } 
+            //   </select>
+
+
+            // </div>
+          )
         }
-      </ul>
     </TrainerContainer>
   );
 }

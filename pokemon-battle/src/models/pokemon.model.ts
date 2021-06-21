@@ -3,7 +3,7 @@ import { Skill } from './skills.model';
 
 export class Pokemon {
   id: string;
-  skills!: Skill[];
+  skills: Skill[] = [];
 
   constructor(
     public num: number,

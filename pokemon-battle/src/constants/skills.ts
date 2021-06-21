@@ -14,6 +14,39 @@ const lick = new Skill('Lick', 30, 30, types.ghost);
 const airSlash = new Skill('Air slash', 10, 45, types.flying);
 const iceBeam = new Skill('Ice beam', 10, 45, types.ice);
 
+/* Object.keys(patata) = [
+    tackle,
+    waterGun,
+    thunderBolt,
+    ember,
+    vineWhip,
+    earthquacke,
+    bite,
+    psychicBeam,
+    sludgeBomb,
+    lick,
+    airSlash,
+    iceBeam
+  ]
+
+ patata[0] = tackle;
+  skills[patata[0]]
+*/
+
+/*
+ Object.values(skills) = [
+   Skill,
+   Skill
+ ]
+*/
+
+/* 
+ Object.entries(skills) = [
+   ['tackle', Skill]
+ ]
+*/
+
+
 export const skills = {
   tackle,
   waterGun,
