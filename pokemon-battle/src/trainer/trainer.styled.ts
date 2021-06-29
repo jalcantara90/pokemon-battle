@@ -1,12 +1,14 @@
 import styled from 'styled-components'
 
 export const TrainerContainer = styled.div`
+  padding: 0.5rem;
   border-radius: 3px;
   border: 2px solid black;
   padding: 1rem;
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const TrainerInput = styled.input`
@@ -36,4 +38,12 @@ export const CreateTrainerButton = styled.button`
   &:hover {
     background-color: #000000a3;
   }
+`;
+
+export const PokemonGrid = styled.div`
+  display: grid;
+  width: 100%;
+  gap: .5rem;
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  grid-template-rows: max-content;
 `;

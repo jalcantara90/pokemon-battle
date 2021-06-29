@@ -33,6 +33,39 @@ function App() {
     }
   }
 
+  const handleDeletePokemon = (idTrainer: string, pokemon: Pokemon) => {
+    // const findedTrainer = trainerList.find(trainer => { // versión poco mantenible
+    //   if(idTrainer === trainer.id){
+    //     return true;
+    //   }else{
+    //     return false;
+    //   }
+    // });
+
+    // const findedTrainer = trainerList.find(trainer => { // pero se puede mejorar
+    //   if(idTrainer === trainer.id){
+    //     return true;
+    //   }
+
+    //   return false;
+    // });
+  
+    // const findedTrainer = trainerList.find(trainer => { // hemos mejorado pero no suficiente
+    //   return idTrainer === trainer.id ? true : false;
+    // });
+
+    // const findedTrainer = trainerList.find(trainer => {
+    //   return idTrainer === trainer.id;
+    // });
+  
+    const findedTrainer = trainerList.find(trainer => idTrainer === trainer.id);
+
+    if(findedTrainer) {
+      findedTrainer.dropPokemonOnPC(pokemon);
+      setTrainerList([...trainerList]);
+    }
+  }
+
   return (
     <div className="App">
       <TrainerInput
@@ -49,6 +82,7 @@ function App() {
             pokemonList={pokemonList}
             trainer={trainer}
             addPokemon={handleUpdateTrainer}
+            deletePokemon={handleDeletePokemon}
           />
         })
       }

@@ -2,14 +2,27 @@ import React, { MutableRefObject, useRef } from "react"
 import { ActionButton } from "../components/buttons";
 import { Pokemon } from "../models/pokemon.model";
 import { Trainer } from "../models/trainer.model";
-import { TrainerContainer, TrainerInput } from "./trainer.styled";
+import { PokemonGrid, TrainerContainer, TrainerInput } from "./trainer.styled";
 import {skills} from "../constants/skills";
 
 import { PokemonCard } from './PokemonCard';
 
 type AddPokemonFn = (pokemonId: string, trainerId: string) => void;
+type DeletePokemonFn = (trainerId: string, pokemon: Pokemon) => void;
 
-export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Trainer, pokemonList: [string, Pokemon][], addPokemon: AddPokemonFn }) {
+interface TrainerGridProps {
+  trainer: Trainer,
+  pokemonList: [string, Pokemon][];
+  addPokemon: AddPokemonFn;
+  deletePokemon: DeletePokemonFn;
+}
+
+export function TrainerGrid({ 
+  trainer,
+  pokemonList,
+  addPokemon,
+  deletePokemon
+}: TrainerGridProps) {
   const dataListRef = useRef() as MutableRefObject<HTMLInputElement>;
 
   const handleAddPokemonClick = () => {
@@ -17,12 +30,16 @@ export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Tra
     dataListRef.current.value = ''
   }
 
+  const handleDeletePokemon = (pokemon: Pokemon) => {
+    deletePokemon(trainer.id, pokemon);
+  }
+
   return (
     <TrainerContainer className="mt-2">
       <h3>{trainer.name}</h3>
       <div>
 
-        <TrainerInput type="text" list="data" className='mr-2' ref={dataListRef} />
+        <TrainerInput type="text" list="data" className='mr-1' ref={dataListRef} />
 
         <datalist id="data" >
           {
@@ -33,12 +50,15 @@ export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Tra
         </datalist>
 
         <ActionButton onClick={handleAddPokemonClick}>Añadir pokemon</ActionButton>
-      </div>  
+      </div>
+      <PokemonGrid>
         {
           trainer.pokemonList.map(p => 
             <PokemonCard 
               key={p.id}
-              pokemon={p} skills={Object.values(skills)} 
+              pokemon={p}
+              skills={Object.values(skills)}
+              deletePokemon={handleDeletePokemon}
             />
             // <div key={p.id}>
             //   <img src={`src/assets/pokemon-front/${p.name.toLowerCase()}.gif`} alt="" />
@@ -75,6 +95,7 @@ export function TrainerGrid({ trainer, pokemonList, addPokemon }: { trainer: Tra
             // </div>
           )
         }
+      </PokemonGrid>
     </TrainerContainer>
   );
 }

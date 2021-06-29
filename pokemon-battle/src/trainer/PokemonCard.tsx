@@ -1,8 +1,20 @@
 import React, { ChangeEvent } from "react";
 import { Pokemon } from "../models/pokemon.model";
 import { Skill } from "../models/skills.model";
+import { 
+  PokemonImg,
+  PokemonSkill,
+  PokemonTitle,
+  PokemonStatsList,
+  PokemonCardContainer,
+  PokemonImageContainer,
+  PokemonAttackContainer,
+  PokemonDeleteButton
+} from "./PokemonCard.styled";
 
-export function PokemonCard({ pokemon, skills }: { pokemon: Pokemon, skills: Skill[] }) {
+type DeletePokemonFn = (pokemon: Pokemon) => void;
+
+export function PokemonCard({ pokemon, skills, deletePokemon }: { pokemon: Pokemon, skills: Skill[], deletePokemon: DeletePokemonFn }) {
 
   const setAttack = (event: ChangeEvent<HTMLSelectElement>, index: number) => {
     pokemon.skills[index] = skills[parseInt(event.target.value)]
@@ -27,10 +39,13 @@ export function PokemonCard({ pokemon, skills }: { pokemon: Pokemon, skills: Ski
   // }
   
   return (
-    <div>
-      <img src={`src/assets/pokemon-front/${pokemon.name.toLowerCase()}.gif`} alt="" />
-      {pokemon.name}
-      <ul>
+    <PokemonCardContainer>
+      
+      <PokemonImageContainer>
+        <PokemonTitle>{pokemon.name}</PokemonTitle>
+        <PokemonImg src={`src/assets/pokemon-front/${pokemon.name.toLowerCase()}.gif`} alt="" />
+      </PokemonImageContainer>
+      <PokemonStatsList>
       {
         Object.entries(pokemon.baseStats).map(([statName, statValue]) => {
           return <li key={statName}> 
@@ -39,47 +54,39 @@ export function PokemonCard({ pokemon, skills }: { pokemon: Pokemon, skills: Ski
           </li>
         })
       }
-      </ul>
-
-      <label htmlFor="">
-        Ataque: 1
-        <select name="Attaks" id="" onChange={(event) => setAttack(event, 0)}>
+      </PokemonStatsList>
+      <PokemonAttackContainer>
+        <legend>Ataques:</legend>
+        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 0)}>
           {
             skills.map((skill, index) => {
               return <option key={index} value={index}>{skill.name}</option>
             })
           } 
-        </select>
-      </label>
-      <label htmlFor="">
-        Ataque: 2
-        <select name="Attaks" id="" onChange={(event) => setAttack(event, 1)}>
+        </PokemonSkill>
+        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 1)}>
           {
             skills.map((skill, index) => {
               return <option key={index} value={index}>{skill.name}</option>
             }) 
           } 
-        </select>
-      </label>  
-      <label htmlFor="">
-        Ataque: 3
-        <select name="Attaks" id="" onChange={(event) => setAttack(event, 2)}>
+        </PokemonSkill>
+        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 2)}>
           {
             skills.map((skill, index) => {
               return <option key={index} value={index}>{skill.name}</option>
             }) 
           } 
-        </select>
-      </label>  <label htmlFor="">
-        Ataque: 4
-        <select name="Attaks" id="" onChange={(event) => setAttack(event, 3)}>
+        </PokemonSkill>
+        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 3)}>
           {
             skills.map((skill, index) => {
               return <option key={index} value={index}>{skill.name}</option>
             }) 
           } 
-        </select>
-      </label>
-    </div>
+        </PokemonSkill>
+      </PokemonAttackContainer>
+      <PokemonDeleteButton onClick={() => {deletePokemon(pokemon)}}>X</PokemonDeleteButton>
+    </PokemonCardContainer>
   )
 };
