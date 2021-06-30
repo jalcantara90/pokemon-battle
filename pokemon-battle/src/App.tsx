@@ -6,10 +6,11 @@ import { TrainerInput, CreateTrainerButton} from './trainer/trainer.styled';
 import { TrainerGrid } from './trainer/Trainer';
 import { Pokedex, pokemonList } from './data/pokedex';
 import { Pokemon } from './models/pokemon.model';
+import { blue, red } from './data/trainers';
 
 function App() {
   const [trainerName, setTrainerName] = useState('');
-  const [trainerList, setTrainerList] = useState<Trainer[]>([]);
+  const [trainerList, setTrainerList] = useState<Trainer[]>([blue, red]);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTrainerName(event.target.value);
