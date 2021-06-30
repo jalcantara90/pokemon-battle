@@ -8,7 +8,6 @@ export const TrainerContainer = styled.div`
   display: flex;
   align-items: flex-start;
   flex-direction: column;
-  width: 100%;
 `;
 
 export const TrainerInput = styled.input`
@@ -44,6 +43,6 @@ export const PokemonGrid = styled.div`
   display: grid;
   width: 100%;
   gap: .5rem;
-  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(29rem, 1fr));
   grid-template-rows: max-content;
 `;

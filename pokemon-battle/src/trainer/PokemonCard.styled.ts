@@ -57,9 +57,10 @@ export const PokemonTitle = styled.h2`
   font-size: 1rem;
   font-weight: bold;
 `;
-export const PokemonImg = styled.img`
-  /* width: 4rem; */
-
+export const PokemonImgBlock = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
 `;
 
 export const PokemonAttackContainer = styled.fieldset`

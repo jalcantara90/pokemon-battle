@@ -2,7 +2,7 @@ import React, { ChangeEvent } from "react";
 import { Pokemon } from "../models/pokemon.model";
 import { Skill } from "../models/skills.model";
 import { 
-  PokemonImg,
+  PokemonImgBlock,
   PokemonSkill,
   PokemonTitle,
   PokemonStatsList,
@@ -43,7 +43,9 @@ export function PokemonCard({ pokemon, skills, deletePokemon }: { pokemon: Pokem
       
       <PokemonImageContainer>
         <PokemonTitle>{pokemon.name}</PokemonTitle>
-        <PokemonImg src={`src/assets/pokemon-front/${pokemon.name.toLowerCase()}.gif`} alt="" />
+        <PokemonImgBlock>
+          <img src={`src/assets/pokemon-front/${pokemon.name.toLowerCase()}.gif`} alt=""/>
+        </PokemonImgBlock>
       </PokemonImageContainer>
       <PokemonStatsList>
       {
