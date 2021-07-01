@@ -9,12 +9,21 @@ import {
   PokemonCardContainer,
   PokemonImageContainer,
   PokemonAttackContainer,
-  PokemonDeleteButton
+  PokemonDeleteButton,
+  PokemonSelectButton,
+  PokemonSelectButtonContainer
 } from "./PokemonCard.styled";
 
-type DeletePokemonFn = (pokemon: Pokemon) => void;
+type PokemonAction = (pokemon: Pokemon) => void;
 
-export function PokemonCard({ pokemon, skills, deletePokemon }: { pokemon: Pokemon, skills: Skill[], deletePokemon: DeletePokemonFn }) {
+interface PokemonCardProps {
+  pokemon: Pokemon;
+  skills?: Skill[];
+  deletePokemon?: PokemonAction;
+  selectPokemon?: PokemonAction;
+}
+
+ export function PokemonCard({ pokemon, skills = [], deletePokemon, selectPokemon }: PokemonCardProps) {
 
   const setAttack = (event: ChangeEvent<HTMLSelectElement>, index: number) => {
     pokemon.skills[index] = skills[parseInt(event.target.value)]
@@ -57,38 +66,46 @@ export function PokemonCard({ pokemon, skills, deletePokemon }: { pokemon: Pokem
         })
       }
       </PokemonStatsList>
-      <PokemonAttackContainer>
-        <legend>Ataques:</legend>
-        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 0)}>
-          {
-            skills.map((skill, index) => {
-              return <option key={index} value={index}>{skill.name}</option>
-            })
-          } 
-        </PokemonSkill>
-        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 1)}>
-          {
-            skills.map((skill, index) => {
-              return <option key={index} value={index}>{skill.name}</option>
-            }) 
-          } 
-        </PokemonSkill>
-        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 2)}>
-          {
-            skills.map((skill, index) => {
-              return <option key={index} value={index}>{skill.name}</option>
-            }) 
-          } 
-        </PokemonSkill>
-        <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 3)}>
-          {
-            skills.map((skill, index) => {
-              return <option key={index} value={index}>{skill.name}</option>
-            }) 
-          } 
-        </PokemonSkill>
-      </PokemonAttackContainer>
-      <PokemonDeleteButton onClick={() => {deletePokemon(pokemon)}}>X</PokemonDeleteButton>
+      {
+        skills.length ? <PokemonAttackContainer>
+            <legend>Ataques:</legend>
+            <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 0)}>
+              {
+                skills.map((skill, index) => {
+                  return <option key={index} value={index}>{skill.name}</option>
+                })
+              } 
+            </PokemonSkill>
+            <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 1)}>
+              {
+                skills.map((skill, index) => {
+                  return <option key={index} value={index}>{skill.name}</option>
+                }) 
+              } 
+            </PokemonSkill>
+            <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 2)}>
+              {
+                skills.map((skill, index) => {
+                  return <option key={index} value={index}>{skill.name}</option>
+                }) 
+              } 
+            </PokemonSkill>
+            <PokemonSkill name="Attaks" id="" onChange={(event) => setAttack(event, 3)}>
+              {
+                skills.map((skill, index) => {
+                  return <option key={index} value={index}>{skill.name}</option>
+                }) 
+              } 
+            </PokemonSkill>
+          </PokemonAttackContainer>
+          : ''
+      }
+      {
+        deletePokemon && <PokemonDeleteButton onClick={() => {deletePokemon(pokemon)}}>X</PokemonDeleteButton>
+      }
+      {
+        selectPokemon && <PokemonSelectButtonContainer> <PokemonSelectButton>I choose you!</PokemonSelectButton> </PokemonSelectButtonContainer>
+      }
     </PokemonCardContainer>
   )
 };
