@@ -9,10 +9,11 @@ export class Pokemon {
     public num: number,
     public name: string,
     public types: string[],
-    public baseStats: BaseStats,
-    public skills: Skill[] = []
+    public baseStats: Stats,
+    public skills: Skill[] = [],
+    id?: string
   ) {
-    this.id = uuid();
+    this.id = id ? id : uuid();
   }
 
   static FromPokemon({
@@ -26,7 +27,7 @@ export class Pokemon {
   }
 }
 
-export interface BaseStats {
+export interface Stats {
   hp: number; 
   atk: number; 
   def: number; 

@@ -104,7 +104,7 @@ interface PokemonCardProps {
         deletePokemon && <PokemonDeleteButton onClick={() => {deletePokemon(pokemon)}}>X</PokemonDeleteButton>
       }
       {
-        selectPokemon && <PokemonSelectButtonContainer> <PokemonSelectButton>I choose you!</PokemonSelectButton> </PokemonSelectButtonContainer>
+        selectPokemon && <PokemonSelectButtonContainer onClick={() => selectPokemon(pokemon) }> <PokemonSelectButton>I choose you!</PokemonSelectButton> </PokemonSelectButtonContainer>
       }
     </PokemonCardContainer>
   )
