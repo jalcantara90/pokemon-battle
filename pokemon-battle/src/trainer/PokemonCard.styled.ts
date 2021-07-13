@@ -22,6 +22,21 @@ export const PokemonDeleteButton = styled.button`
   }
 `;
 
+export const PokemonSelectButtonContainer = styled.div`
+  backdrop-filter: blur(1px);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+`;
+
+
+
 export const PokemonCardContainer = styled.div`
   padding: .5rem;
   border: 2px solid black;
@@ -43,6 +58,11 @@ export const PokemonCardContainer = styled.div`
   &:hover ${PokemonDeleteButton} {
     display: inherit;
   }
+
+
+  &:hover ${PokemonSelectButtonContainer}{
+    display: inherit;
+  }
 `;
 
 export const PokemonImageContainer = styled.div`
@@ -57,9 +77,10 @@ export const PokemonTitle = styled.h2`
   font-size: 1rem;
   font-weight: bold;
 `;
-export const PokemonImg = styled.img`
-  /* width: 4rem; */
-
+export const PokemonImgBlock = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
 `;
 
 export const PokemonAttackContainer = styled.fieldset`
@@ -83,5 +104,21 @@ export const PokemonSkill = styled.select`
   border: 1px solid black;
   width: 10rem;
   padding: 0.5rem;
+`;
+
+export const PokemonSelectButton = styled.button`
+  padding: .5rem 1.2rem;
+  border-radius: 25px;
+  border: none;
+  background-color: #E4000F;
+  color: white;
+  font-weight: bold;
+  transition: 400ms;
+  transition-property: background-color;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #ff091a;
+  }
 `;
 

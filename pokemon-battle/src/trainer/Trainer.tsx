@@ -17,7 +17,7 @@ interface TrainerGridProps {
   deletePokemon: DeletePokemonFn;
 }
 
-export function TrainerGrid({ 
+export function TrainerGrid({
   trainer,
   pokemonList,
   addPokemon,
