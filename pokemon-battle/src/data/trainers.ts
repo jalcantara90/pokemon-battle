@@ -9,10 +9,10 @@ const p1 = Pokemon.FromPokemon({
   types: ['Water'],
   baseStats: { hp: 79, atk: 83, def: 100, spa: 85, spd: 105, spe: 78 },
   skills: [
-    { name: 'Water gun', pp: 20, damage: 40, type: 'water' },
-    { name: 'Ice beam', pp: 10, damage: 45, type: 'ice' },
-    { name: 'Bite', pp: 25, damage: 60, type: 'dark' },
-    { name: 'Sludge bomb', pp: 10, damage: 55, type: 'psychic' },
+    { name: 'Water gun', pp: 20, damage: 40, type: 'Water' },
+    { name: 'Ice beam', pp: 10, damage: 45, type: 'Ice' },
+    { name: 'Bite', pp: 25, damage: 60, type: 'Dark' },
+    { name: 'Sludge bomb', pp: 10, damage: 55, type: 'Psychic' },
   ],
 } as Pokemon);
 
