@@ -2,14 +2,17 @@
 import {TrainerInput, CreateTrainerButton} from './trainer.styled';
 import {TrainerGrid} from './Trainer';
 import {Pokedex, pokemonList} from '../data/pokedex';
-import React, { useState, ChangeEvent, Fragment } from 'react';
+import React, { useState, ChangeEvent, Fragment, useContext } from 'react';
 import { Pokemon } from '../models/pokemon.model';
 import { Trainer } from '../models/trainer.model';
 import {blue,red} from '../data/trainers';
+import { Context } from '../Context';
 
 export function TrainerComponent() {
   const [trainerName, setTrainerName] = useState('');
-  const [trainerList, setTrainerList] = useState<Trainer[]>([blue, red]);
+  const [trainerList, setTrainerList] = useState<Trainer[]>([]);
+
+  const { setPlayerOne } = useContext(Context);
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setTrainerName(event.target.value);
@@ -30,6 +33,7 @@ export function TrainerComponent() {
 
       trainer.addPokemon(pokemon);
       setTrainerList([...trainerList]);
+      setPlayerOne(trainer);
     }
   }
 
@@ -63,6 +67,7 @@ export function TrainerComponent() {
     if(findedTrainer) {
       findedTrainer.dropPokemonOnPC(pokemon);
       setTrainerList([...trainerList]);
+      setPlayerOne(findedTrainer);
     }
   }
 

@@ -1,24 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import { PokemonCard } from "../trainer/PokemonCard";
 import { blue, red } from "../data/trainers";
 import { PokemonGrid } from "./BattleComponent.styled";
 import { Pokemon } from "../models/pokemon.model";
 import { Skill } from "../models/skills.model";
 import { useBattle } from './hooks/battle.hook';
+import { Context } from "../Context";
 
 export function BattleComponent() {
-
+  const { playerOne, playerTwo } = useContext(Context);
   const [battle, players, playerAction, mustChange, isFinished] = useBattle(
     {
-      trainerId: red.id,
-      name: red.name,
-      pokemonList: red.pokemonList,
+      trainerId: playerOne.id,
+      name: playerOne.name,
+      pokemonList: playerOne.pokemonList,
       currentPokemon: null
     },
     {
-      trainerId: blue.id,
-      name: blue.name,
-      pokemonList: blue.pokemonList,
+      trainerId: playerTwo.id,
+      name: playerTwo.name,
+      pokemonList: playerTwo.pokemonList,
       currentPokemon: null
     }
   );

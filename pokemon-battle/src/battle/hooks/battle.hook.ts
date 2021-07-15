@@ -256,7 +256,7 @@ function randomTurn(player: Player, target: Player): TurnAction {
 }
 
 function selectRandomPokemon(pokemonList: Pokemon[]) {
-  const pokemonAlive = pokemonList.filter(pokemon => pokemon);
+  const pokemonAlive = pokemonList.filter(pokemon => pokemon.isAlive);
 
   return pokemonAlive[randomBetweenTwoNumbers(0, pokemonAlive.length - 1)];
 }
